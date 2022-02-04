@@ -15,13 +15,13 @@
 <body>
 <header class="container-fluid p-0">
     <section class="d-flex flex-direction-row justify-content-between align-items-center ps-5 pe-5 shadow-sm p-3 mb-5 ms-0 bg-body rounded">
-        <a class="h1 text-decoration-none" href="<?= app()->route->getUrl('/popular')?>">Библиотека им. Астама Кузюры</a>
+        <a class="h1 text-decoration-none" href="<?= app()->route->getUrl('/hello')?>">Библиотека им. Астама Кузюры</a>
         <nav>
             <?php
             if (!app()->auth::check()):
                 ?>
-                <a class="btn btn-primary me-5 " href="<?= app()->route->getUrl('/login') ?>">Вход</a>
-
+                <a class="btn btn-primary me-2" href="<?= app()->route->getUrl('/login') ?>">Вход</a>
+                <a class="btn btn-outline-primary" href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
             <?php
             else:
                 ?>
@@ -30,15 +30,7 @@
                         <?= app()->auth::user()->name ?>
                     </button>
                     <article class="dropdown-menu">
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/book_register') ?>">Регистрация книги</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/books') ?>">Все книги</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/reader_card') ?>">Мои книги</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/readers_list') ?>">Читатели</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/books_list') ?>">Книги</a>
                         <a class="dropdown-item" href="<?= app()->route->getUrl('/logout') ?>">Выход</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/logout') ?>">Выход</a>
-
                     </article>
                 </section>
             <?php
@@ -50,7 +42,7 @@
 <main>
     <?= $content ?? '' ?>
 </main>
-<footer class="p-0 container-fluid position-static bottom-0">
+<footer class="p-0 container-fluid position-absolute bottom-0">
     <section class="bg-light d-flex justify-content-center align-items-end">
        <p class="pt-5">© 2022 Библиотека</p>
     </section>

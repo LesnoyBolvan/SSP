@@ -17,15 +17,15 @@ class Site
     }
 
 
-    public function popular(): string
+    public function hello(): string
     {
-        return new View('site.popular', ['message' => 'hello working']);
+        return new View('site.hello', ['message' => 'hello working']);
     }
 
     public function signup(Request $request): string
     {
         if ($request->method === 'POST' && User::create($request->all())) {
-            app()->route->redirect('/popular');
+            app()->route->redirect('/go');
         }
         return new View('site.signup');
     }
@@ -39,7 +39,7 @@ class Site
         }
         //Если удалось аутентифицировать пользователя, то редирект
         if (Auth::attempt($request->all())) {
-            app()->route->redirect('/popular');
+            app()->route->redirect('/hello');
         }
         //Если аутентификация не удалась, то сообщение об ошибке
         return new View('site.login', ['message' => 'Неправильные логин или пароль']);
@@ -48,37 +48,7 @@ class Site
     public function logout(): void
     {
         Auth::logout();
-        app()->route->redirect('/popular');
-    }
-
-    public function book_register(): string
-    {
-        return new View('site.book_register');
-    }
-
-    public function books(): string
-    {
-        return new View('site.books');
-    }
-
-    public function reader_card(): string
-    {
-        return new View('site.reader_card');
-    }
-
-    public function readers_list(): string
-    {
-        return new View('site.readers_list');
-    }
-
-    public function books_list(): string
-    {
-        return new View('site.books_list');
-    }
-
-    public function book(): string
-    {
-        return new View('site.book');
+        app()->route->redirect('/hello');
     }
 
 
