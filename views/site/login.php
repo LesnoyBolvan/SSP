@@ -7,7 +7,7 @@
             ?>
             <form method="post" class="col-5 shadow-sm p-3 mb-5 ms-0 bg-body rounded">
                 <article class="mb-3">
-                    <label for="readCard" class="form-label">Читательский билет</label>
+                    <label for="login" class="form-label">Читательский билет</label>
                     <input type="text" class="form-control" name="login">
                 </article>
                 <article class="mb-3">

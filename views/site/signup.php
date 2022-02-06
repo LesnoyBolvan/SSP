@@ -19,8 +19,8 @@
                     <input type="text" class="form-control" name="patronymic">
                 </article>
                 <article class="mb-3">
-                    <label for="phone_num" class="form-label">Телефон</label>
-                    <input type="text" class="form-control" name="phone_num">
+                    <label for="phone_number" class="form-label">Телефон</label>
+                    <input type="text" class="form-control" name="phone_number">
                 </article>
                 <article class="mb-3">
                     <label for="address" class="form-label">Адрес</label>
@@ -28,10 +28,12 @@
                 </article>
                 <article class="mb-3">
                     <label for="role" class="form-label">Роль</label>
-                    <select class="form-select" aria-label="Default select example" name="role">
-                        <option selected>Читатель</option>
-                        <option value="1">Библиотекарь</option>
-                        <option value="2">Админ</option>
+                    <select class="form-select" aria-label="Default select example" name="role_id">
+                        <?php
+                        foreach ($roles as $role) {
+                            echo '<option label='. $role->role .'>' . $role->id . '</option>';
+                        }
+                        ?>
                     </select>
                 </article>
                 <button type="submit" class="btn btn-primary btn-md mt-2">Добавить</button>

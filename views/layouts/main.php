@@ -27,7 +27,8 @@
                 ?>
                 <section class="btn-group me-5">
                     <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?= app()->auth::user()->name ?>
+                        <?= app()->auth::user()->first_name?>
+                        <?= app()->auth::user()->last_name?>
                     </button>
                     <article class="dropdown-menu">
                         <a class="dropdown-item" href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
