@@ -20,18 +20,9 @@ class User extends Model implements IdentityInterface
 
     protected static function booted()
     {
-
-//        User::create([
-//            'password'=>'123',
-//            'login'=>'321',
-//        ])->library_card()->create([
-//            'valid'=>date('Y-m-d'),
-//            'expired'=>'0',
-//            'staff'=>'0'
-//        ]);
         static::created(function ($user) {
             $user->password = 123;
-            $user->login = 321;
+            $user->login = random_int(1000, 10000);
             $user->save();
         });
     }
@@ -39,6 +30,11 @@ class User extends Model implements IdentityInterface
     public function library_card() : HasOne
     {
         return $this->hasOne(Library_card::class, 'login');
+    }
+
+    public function role()
+    {
+        return $this->hasOne(Role::class, 'role', 'role_id');
     }
 
 

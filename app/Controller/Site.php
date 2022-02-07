@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use Model\Library_card;
 use Model\Post;
 use Model\Role;
 use Src\View;
@@ -27,8 +28,26 @@ class Site
 
     public function signup(Request $request): string
     {
-        if ($request->method === 'POST' && User::create($request->all())) {
+        if ($request->method === 'POST'){
+            $user = User::create([
+                'login'=>random_int(1000, 10000),
+                'role_id'=>$request->role_id,
+                'first_name'=>$request->first_name,
+                'last_name'=>$request->last_name,
+                'patronymic'=>$request->patronymic,
+                'phone_number'=>$request->phone_number,
+                'address'=>$request->address,
+            ]);
 
+            $card = Library_card::create([
+                'number'=> $user->login,
+                'valid'=>date('Y-m-d'),
+            ]);
+
+            if ($user->role_id === '1' or $user->role_id === '3'){
+                $card->staff = 1;
+                $card->save();
+            }
             app()->route->redirect('/popular');
         }
         $roles = Role::orderBy('id')->get();
@@ -86,6 +105,10 @@ class Site
         return new View('site.book');
     }
 
+    public function book_add(): string
+    {
+        return new View('site.book_add');
+    }
 
 
 }

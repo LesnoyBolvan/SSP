@@ -2,6 +2,8 @@
 
 namespace Src\Auth;
 
+use http\Client\Curl\User;
+use Model\Role;
 use Src\Session;
 
 class Auth
@@ -46,6 +48,14 @@ class Auth
     public static function check(): bool
     {
         if (self::user()) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function check_admin(): bool
+    {
+        if (Role::where('id', self::user()['role_id'])->first()['role'] === 'Администратор') {
             return true;
         }
         return false;

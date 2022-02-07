@@ -37,7 +37,7 @@
                         <a class="dropdown-item" href="<?= app()->route->getUrl('/reader_card') ?>">Мои книги</a>
                         <a class="dropdown-item" href="<?= app()->route->getUrl('/readers_list') ?>">Читатели</a>
                         <a class="dropdown-item" href="<?= app()->route->getUrl('/books_list') ?>">Книги</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/logout') ?>">Выход</a>
+                        <a class="dropdown-item" href="<?= app()->route->getUrl('/book_add') ?>">Добавить книгу</a>
                         <a class="dropdown-item" href="<?= app()->route->getUrl('/logout') ?>">Выход</a>
 
                     </article>
