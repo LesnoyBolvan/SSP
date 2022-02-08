@@ -4,8 +4,6 @@ namespace Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Src\Auth\IdentityInterface;
 
@@ -18,14 +16,14 @@ class User extends Model implements IdentityInterface
 
 
 
-    protected static function booted()
-    {
-        static::created(function ($user) {
-            $user->password = 123;
-            $user->login = random_int(1000, 10000);
-            $user->save();
-        });
-    }
+//    protected static function booted()
+//    {
+//        static::created(function ($user) {
+//            $user->password = 123;
+//            $user->login = random_int(1000, 10000);
+//            $user->save();
+//        });
+//    }
 
     public function role() : HasOne
     {

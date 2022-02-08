@@ -15,14 +15,22 @@ class Staff
     public function user_add(Request $request): string
     {
         if ($request->method === 'POST'){
+            $chars = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+            $size = strlen($chars) - 1;
+            $password = '';
+            for($i = 0; $i < 11; $i++) {
+                $password .= $chars[random_int(0, $size)];
+            }
             $user = User::create([
                 'login'=>random_int(1000, 10000),
+                'password'=> $password,
                 'role_id'=>$request->role_id,
                 'first_name'=>$request->first_name,
                 'last_name'=>$request->last_name,
                 'patronymic'=>$request->patronymic,
                 'phone_number'=>$request->phone_number,
                 'address'=>$request->address,
+
             ]);
 
             $card = Library_card::create([
