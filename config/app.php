@@ -8,5 +8,9 @@ return [
     'routeMiddleware' => [
         'auth' => \Middlewares\AuthMiddleware::class,
         'admin' => \Middlewares\AdminMiddleware::class,
+        'librarian' => \Middlewares\LibrarianMiddleware::class,
+        'staff' => \Middlewares\StaffMiddleware::class,
+
+
     ]
 ];

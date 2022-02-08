@@ -3,6 +3,7 @@
 namespace Src\Auth;
 
 use http\Client\Curl\User;
+use Model\Library_card;
 use Model\Role;
 use Src\Session;
 
@@ -56,6 +57,22 @@ class Auth
     public static function check_admin(): bool
     {
         if (Role::where('id', self::user()['role_id'])->first()['role'] === 'Администратор') {
+            return true;
+        }
+        return false;
+    }
+
+    public static function check_librarian(): bool
+    {
+        if (Role::where('id', self::user()['role_id'])->first()['role'] === 'Библиотекарь') {
+            return true;
+        }
+        return false;
+    }
+
+    public static function check_staff(): bool
+    {
+        if (Library_card::where('number', self::user()['login'])->first()['staff'] === 1) {
             return true;
         }
         return false;

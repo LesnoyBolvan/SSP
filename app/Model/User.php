@@ -27,18 +27,10 @@ class User extends Model implements IdentityInterface
         });
     }
 
-    public function library_card() : HasOne
+    public function role() : HasOne
     {
-        return $this->hasOne(Library_card::class, 'login');
+        return $this->hasOne(Role::class, 'id', 'role_id');
     }
-
-    public function role()
-    {
-        return $this->hasOne(Role::class, 'role', 'role_id');
-    }
-
-
-
 
 
 

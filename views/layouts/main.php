@@ -20,31 +20,42 @@
             <?php
             if (!app()->auth::check()):
                 ?>
-                <a class="btn btn-primary me-5 " href="<?= app()->route->getUrl('/login') ?>">Вход</a>
-
+                <a class="btn btn-primary me-2 " href="<?= app()->route->getUrl('/login') ?>">Вход</a>
+                <a class="btn btn-outline-primary me-5 " href="<?= app()->route->getUrl('/login') ?>">Регистрация</a>
             <?php
             else:
                 ?>
                 <section class="btn-group me-5">
                     <button type="button" class="btn btn-outline-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <?= app()->auth::user()->first_name?>
-                        <?= app()->auth::user()->last_name?>
+                            <?= app()->auth::user()->first_name?>
+                            <?= app()->auth::user()->last_name?>
                     </button>
                     <article class="dropdown-menu">
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/signup') ?>">Регистрация</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/book_register') ?>">Регистрация книги</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/books') ?>">Все книги</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/reader_card') ?>">Мои книги</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/readers_list') ?>">Читатели</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/books_list') ?>">Книги</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/book_add') ?>">Добавить книгу</a>
-                        <a class="dropdown-item" href="<?= app()->route->getUrl('/logout') ?>">Выход</a>
-
+                        <?php
+                        if (app()->auth::check_librarian() or app()->auth::check_admin()):
+                            ?>
+                            <a class="dropdown-item" href="<?= app()->route->getUrl('/book_register') ?>">Регистрация книги</a>
+                            <a class="dropdown-item" href="<?= app()->route->getUrl('/user_add') ?>">Добавить пользователя</a>
+                            <a class="dropdown-item" href="<?= app()->route->getUrl('/book_add') ?>">Добавить книгу</a>
+                            <a class="dropdown-item" href="<?= app()->route->getUrl('/readers_list') ?>">Список читателей</a>
+                            <a class="dropdown-item" href="<?= app()->route->getUrl('/books_list') ?>">Список книг</a>
+                        <?php
+                        endif;
+                            ?>
+                        <?php
+                        if (app()->auth::check()):
+                            ?>
+                            <a class="dropdown-item" href="<?= app()->route->getUrl('/books') ?>">Все книги</a>
+                            <a class="dropdown-item" href="<?= app()->route->getUrl('/reader_card') ?>">Мои книги</a>
+                            <a class="dropdown-item" href="<?= app()->route->getUrl('/logout') ?>">Выход</a>
+                        <?php
+                        endif;
+                        ?>
                     </article>
                 </section>
             <?php
             endif;
-            ?>
+                ?>
         </nav>
     </section>
 </header>
