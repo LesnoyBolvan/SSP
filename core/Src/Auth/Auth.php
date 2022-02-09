@@ -56,7 +56,7 @@ class Auth
 
     public static function check_admin(): bool
     {
-        if (Role::where('id', self::user()['role_id'])->first()['role'] === 'Администратор') {
+        if (Role::where('id', self::user()['role_id'])->first()['code'] === 'admin') {
             return true;
         }
         return false;
@@ -64,7 +64,7 @@ class Auth
 
     public static function check_librarian(): bool
     {
-        if (Role::where('id', self::user()['role_id'])->first()['role'] === 'Библиотекарь') {
+        if (Role::where('id', self::user()['role_id'])->first()['code'] === 'librarian') {
             return true;
         }
         return false;

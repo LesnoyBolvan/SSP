@@ -32,7 +32,7 @@
                     </button>
                     <article class="dropdown-menu">
                         <?php
-                        if (app()->auth::check_librarian() or app()->auth::check_admin()):
+                        if (app()->auth::check_staff()):
                             ?>
                             <a class="dropdown-item" href="<?= app()->route->getUrl('/book_register') ?>">Регистрация книги</a>
                             <a class="dropdown-item" href="<?= app()->route->getUrl('/user_add') ?>">Добавить пользователя</a>

@@ -38,7 +38,7 @@ class Staff
                 'valid'=>date('Y-m-d'),
             ]);
 
-            if (User::find(1)->role()->where('role', 'Библиотекарь' or 'Администратор')){
+            if ($user->role->code==='librarian' or $user->role->code==='admin'){
                 $card->staff = 1;
                 $card->save();
             }
