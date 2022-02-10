@@ -37,6 +37,7 @@
                             <a class="dropdown-item" href="<?= app()->route->getUrl('/book_register') ?>">Регистрация книги</a>
                             <a class="dropdown-item" href="<?= app()->route->getUrl('/user_add') ?>">Добавить пользователя</a>
                             <a class="dropdown-item" href="<?= app()->route->getUrl('/book_add') ?>">Добавить книгу</a>
+                            <a class="dropdown-item" href="<?= app()->route->getUrl('/author_add') ?>">Добавить автора</a>
                             <a class="dropdown-item" href="<?= app()->route->getUrl('/readers_list') ?>">Список читателей</a>
                             <a class="dropdown-item" href="<?= app()->route->getUrl('/books_list') ?>">Список книг</a>
                         <?php

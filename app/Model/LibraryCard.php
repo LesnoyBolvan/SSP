@@ -8,11 +8,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Src\Auth\IdentityInterface;
 
-class Library_card extends Model
+class LibraryCard extends Model
 {
     use HasFactory;
     public $timestamps = false;
     protected $guarded = [];
 
+    public function user() : BelongsTo
+    {
+        return $this->belongsTo(User::class, 'login', 'number');
+    }
 
 }

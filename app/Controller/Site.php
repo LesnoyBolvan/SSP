@@ -2,7 +2,6 @@
 
 namespace Controller;
 
-use Model\Library_card;
 use Model\Role;
 use Src\View;
 use Src\Request;

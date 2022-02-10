@@ -14,8 +14,6 @@ class User extends Model implements IdentityInterface
     public $timestamps = false;
     protected $guarded = [];
 
-
-
 //    protected static function booted()
 //    {
 //        static::created(function ($user) {
@@ -25,12 +23,21 @@ class User extends Model implements IdentityInterface
 //        });
 //    }
 
+    public function password(): string
+    {
+        $chars = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+        $size = strlen($chars) - 1;
+        $password = '';
+        for($i = 0; $i < 11; $i++) {
+            $password .= $chars[random_int(0, $size)];
+        }
+        return $password;
+    }
+
     public function role() : HasOne
     {
         return $this->hasOne(Role::class, 'id', 'role_id');
     }
-
-
 
         //Выборка пользователя по первичному ключу
     public function findIdentity(int $id)

@@ -4,6 +4,7 @@ namespace Src\Auth;
 
 use http\Client\Curl\User;
 use Model\Library_card;
+use Model\LibraryCard;
 use Model\Role;
 use Src\Session;
 
@@ -72,11 +73,20 @@ class Auth
 
     public static function check_staff(): bool
     {
-        if (Library_card::where('number', self::user()['login'])->first()['staff'] === 1) {
+        if (LibraryCard::where('number', self::user()['login'])->first()['staff'] === 1) {
             return true;
         }
         return false;
     }
+
+    //Генерация нового токена для CSRF
+    public static function generateCSRF(): string
+    {
+        $token = md5(time());
+        Session::set('csrf_token', $token);
+        return $token;
+    }
+
 
     //Выход текущего пользователя
     public static function logout(): bool

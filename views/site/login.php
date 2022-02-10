@@ -6,6 +6,7 @@
         if (!app()->auth::check()):
             ?>
             <form method="post" class="col-5 shadow-sm p-3 mb-5 ms-0 bg-body rounded">
+                <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
                 <article class="mb-3">
                     <label for="login" class="form-label">Читательский билет</label>
                     <input type="text" class="form-control" name="login">

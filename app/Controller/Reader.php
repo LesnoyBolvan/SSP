@@ -23,7 +23,7 @@ class Reader
         return new View('site.books');
     }
 
-    public function reader_card(): string
+    public function readerCard(): string
     {
         return new View('site.reader_card');
     }

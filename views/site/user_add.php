@@ -1,11 +1,12 @@
 <div class="container">
+    <?php
+    if (app()->auth::check()):
+        ?>
     <h2 class="mb-4">Добавить пользователя</h2>
     <section class="row">
         <h3><?= $message ?? ''; ?></h3>
-        <?php
-        if (app()->auth::check()):
-            ?>
             <form method="post" class="col-5 shadow-sm p-3 mb-5 ms-0 bg-body rounded">
+                <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
                 <article class="mb-3">
                     <label for="first_name" class="form-label">Имя</label>
                     <input type="text" class="form-control" name="first_name">
@@ -38,6 +39,10 @@
                 </article>
                 <button type="submit" class="btn btn-primary btn-md mt-2">Добавить</button>
             </form>
-        <?php endif ?>
     </section>
+    <?php
+    else:
+        ?>
+        <h3>Как вы здесь оказались!?</h3>
+    <?php endif; ?>
 </div>

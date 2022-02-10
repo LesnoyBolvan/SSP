@@ -1,4 +1,7 @@
 <div class="container overflow-hidden mb-5">
+    <?php
+    if (app()->auth::check_staff()):
+    ?>
     <section class="d-flex flex-direction-row">
         <h2 class="mb-5 me-3">Читатели</h2>
         <form method="post" class="row g-3">
@@ -42,5 +45,9 @@
             <div class="col">Адрес</div>
         </article>
     </section>
-
+    <?php
+    else:
+        ?>
+        <h3>Как вы здесь оказались!?</h3>
+    <?php endif; ?>
 </div>
