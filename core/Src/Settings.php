@@ -36,4 +36,9 @@ class Settings
         return $this->db ?? [];
     }
 
+    public function getUploadPath(): string
+    {
+        return $this->path['upload'].'/' ?? '';
+    }
+
 }

@@ -40,6 +40,7 @@
                             <a class="dropdown-item" href="<?= app()->route->getUrl('/author_add') ?>">Добавить автора</a>
                             <a class="dropdown-item" href="<?= app()->route->getUrl('/readers_list') ?>">Список читателей</a>
                             <a class="dropdown-item" href="<?= app()->route->getUrl('/books_list') ?>">Список книг</a>
+                            <a class="dropdown-item" href="<?= app()->route->getUrl('/authors_list') ?>">Список авторов</a>
                         <?php
                         endif;
                             ?>

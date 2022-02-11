@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+use Model\Book;
 use Model\Library_card;
 use Model\Post;
 use Model\Role;
@@ -20,7 +21,8 @@ class Reader
 
     public function books(): string
     {
-        return new View('site.books');
+        $books = Book::all();
+        return new View('site.books', ['books' => $books]);
     }
 
     public function readerCard(): string

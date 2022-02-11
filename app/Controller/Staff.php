@@ -5,11 +5,13 @@ namespace Controller;
 use Model\Author;
 use Model\Book;
 use Model\LibraryCard;
+use Model\RentedBook;
 use Model\Role;
 use Model\User;
 use Src\View;
 use Src\Request;
 use Src\Validator\Validator;
+
 
 class Staff
 {
@@ -29,7 +31,6 @@ class Staff
             ]);
 
             if($validator->fails()){
-                $roles = Role::orderBy('id')->get();
                 return new View('site.user_add',
                     ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
             }
@@ -61,17 +62,68 @@ class Staff
         return (new View())->render('site.user_add', ['roles'=>$roles]);
     }
 
-    public function bookRegister(): string
+    public function bookRegister(Request $request): string
     {
-        return new View('site.book_register');
+        if ($request->method==='POST' && RentedBook::create($request->all())){
+            return new View('site.book_add', ['message'=>'Книга оформлена']);
+        }
+        $books = Book::all();
+        $users = User::where('role_id', '!=', 3)->get();
+        return new View('site.book_register', ['books'=>$books, 'users'=>$users]);
     }
 
     public function bookAdd(Request $request): string
     {
-        if ($request->method==='POST' && Book::create($request->all())){
-            return new View('site.book_add', ['message'=>'Книга добавлена']);
+        if ($request->method==='POST'){
+            $file = $_FILES['image']['name'];
+            $file_tmp = $_FILES['image']['tmp_name'];
+            $path = app()->settings->getUploadPath();
+//            $type_valid = ['image/jpeg','image/jpg','image/png'];
+//            if(in_array())
+            move_uploaded_file($file_tmp, $path.$file);
+
+            $validator = new Validator($request->all(), [
+                'title'=> ['required'],
+                'annotation'=> ['required'],
+                'year'=> ['required'],
+                'image'=> ['required'],
+                'new_edition'=>['required'],
+                'price'=>['required']
+            ], [
+                'required' => 'Поле :field пусто',
+                'unique' => 'Поле :field должно быть уникально',
+//                'fileType'=>'Недопустимое разрешение файла',
+            ]);
+
+            if($validator->fails()){
+                return new View('site.book_add',
+                    ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
+            }
+
+            if(Book::create([
+                'title'=>$request->title,
+                'annotation'=>$request->annotation,
+                'year'=>$request->year,
+                'image'=>$file,
+                'new_edition'=>$request->new_edition,
+                'price'=>$request->price,
+            ])){
+
+                return new View('site.book_add', ['message'=>'Книга добавлена']);
+            }
+
         }
         return new View('site.book_add');
+    }
+
+    public function bookDelete(Request $request): string
+    {
+        Book::where('id', $request->id)->delete();
+        $books = Book::all();
+        app()->route->redirect('/books_list');
+
+        return (new View())->render('site.books_list', ['books' => $books]);
+
     }
 
     public function authorAdd(Request $request): string
@@ -86,7 +138,6 @@ class Staff
             ]);
 
             if($validator->fails()){
-                $roles = Role::orderBy('id')->get();
                 return new View('site.user_add',
                     ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
             }
@@ -101,13 +152,20 @@ class Staff
 
     public function readersList(): string
     {
-        return new View('site.readers_list');
+        $users = User::where('role_id', '!=', 3)->get();
+        return new View('site.readers_list', ['users' => $users]);
     }
 
     public function booksList(): string
     {
-        return new View('site.books_list');
+        $books = Book::all();
+        return new View('site.books_list', ['books' => $books]);
     }
 
+    public function authorsList(): string
+    {
+        $authors = Author::all();
+        return new View('site.authors_list', ['authors' => $authors]);
+    }
 
 }

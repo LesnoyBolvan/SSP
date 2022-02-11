@@ -2,7 +2,7 @@
     <?php
     if (app()->auth::check_staff()):
     ?>
-    <h2 class="mb-4">Регистрация книги</h2>
+    <h2 class="mb-4">Оформление книги</h2>
     <section class="row">
         <h3><?= $message ?? ''; ?></h3>
             <form method="post" class="col-5 shadow-sm p-3 mb-5 ms-0 bg-body rounded">
@@ -10,17 +10,21 @@
                 <article class="mb-3">
                     <label for="book" class="form-label">Книга</label>
                     <select class="form-select" aria-label="Выберите книгу" name="book">
-                        <option value="1">Мертвые души</option>
-                        <option value="2">Война и мир</option>
-                        <option value="3">На дне</option>
+                        <?php
+                        foreach ($books as $book) {
+                            echo '<option label='. $book->title .'>' . $book->id . '</option>';
+                        }
+                        ?>
                     </select>
                 </article>
                 <article class="mb-3">
                     <label for="user" class="form-label">Читатель</label>
                     <select class="form-select" aria-label="Выберите читателя" name="user">
-                        <option value="1">Иван Иваныч</option>
-                        <option value="2">Владимир Владимирович</option>
-                        <option value="3">Женька Женьков</option>
+                        <?php
+                        foreach ($users as $user) {
+                            echo '<option label='. $user->first_name . '' . $user->patronymic . '' . $user->last_name . '>' . $user->id . '</option>';
+                        }
+                        ?>
                     </select>
                 </article>
                 <article class="mb-3">

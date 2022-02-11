@@ -12,11 +12,15 @@ Route::add(['GET', 'POST'], '/book_register', [Controller\Staff::class, 'bookReg
     ->middleware('staff');
 Route::add('GET', '/readers_list', [Controller\Staff::class, 'readersList'])
     ->middleware('staff');
-Route::add('GET', '/books_list', [Controller\Staff::class, 'booksList'])
+Route::add(['GET', 'POST'], '/books_list', [Controller\Staff::class, 'booksList'])
     ->middleware('staff');
 Route::add(['GET', 'POST'], '/book_add', [Controller\Staff::class, 'bookAdd'])
     ->middleware('staff');
+Route::add(['GET', 'POST'], '/book_delete', [Controller\Staff::class, 'bookDelete'])
+    ->middleware('staff');
 Route::add(['GET', 'POST'], '/author_add', [Controller\Staff::class, 'authorAdd'])
+    ->middleware('staff');
+Route::add('GET', '/authors_list', [Controller\Staff::class, 'authorsList'])
     ->middleware('staff');
 Route::add('GET', '/book', [Controller\Reader::class, 'book'])
     ->middleware('auth');

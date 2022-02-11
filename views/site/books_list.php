@@ -20,31 +20,23 @@
             </article>
         </form>
     </section>
-
-    <section class="col-9 border bg-light rounded-3 p-2 mb-2">
-        <article class="row ps-2 pe-2">
-            <div class="col h6 m-0">Мертвые души</div>
-            <a class="h5 text-decoration-none col m-0" href="">Иван Иваныч Гоголь </a>
-            <div class="col">1956 год</div>
-            <div class="col">Новое издание: нет</div>
-        </article>
-    </section>
-    <section class="col-9 border bg-light rounded-3 p-2 mb-2">
-        <article class="row ps-2 pe-2">
-            <div class="col h6 m-0">Мертвые души</div>
-            <a class="h5 text-decoration-none col m-0" href="">Иван Иваныч Гоголь </a>
-            <div class="col">1956 год</div>
-            <div class="col">Новое издание: нет</div>
-        </article>
-    </section>
-    <section class="col-9 border bg-light rounded-3 p-2 mb-2">
-        <article class="row ps-2 pe-2">
-            <div class="col h6 m-0">Мертвые души</div>
-            <a class="h5 text-decoration-none col m-0" href="">Иван Иваныч Гоголь </a>
-            <div class="col">1956 год</div>
-            <div class="col">Новое издание: нет</div>
-        </article>
-    </section>
+        <?php
+        foreach ($books as $book) {
+            echo '<section class="col-12 border bg-light rounded-3 p-2 mb-2">';
+            echo '<article class="row ps-2 pe-0">' ;
+            echo '<div class="col h5 m-0">' . $book->title . '</div>';
+            echo '<p class="h6 text-decoration-none col m-0">автор моложец</p>';
+            echo '<div class="col">' . $book->year . '</div>';
+            echo '<div class="col"> Новое издание: ' . $book->new_edition . '</div>';
+            echo '<a class="col btn btn-danger btn-sm" href='.app()->route->getUrl('/book_delete?id='. $book->id).'>Удалить</a>';
+//            echo '<form method="post" class="col pe-0 m-0">';
+/*            echo '<input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>';*/
+//            echo '<button type="submit" class="btn btn-danger btn-sm">Удалить</button>';
+//            echo '</form>';
+            echo '</article>' ;
+            echo '</section>';
+        }
+        ?>
     <?php
     else:
         ?>

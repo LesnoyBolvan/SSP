@@ -20,31 +20,18 @@
             </article>
         </form>
     </section>
-
-    <section class="col-9 border bg-light rounded-3 p-2 mb-2">
-        <article class="row ps-2 pe-2">
-            <div class="col h6 m-0">Номер чит билета</div>
-            <a class="h5 text-decoration-none col m-0" href="">Иван Иваныч </a>
-            <div class="col">номер телефона</div>
-            <div class="col">Адрес</div>
-        </article>
-    </section>
-    <section class="col-9 border bg-light rounded-3 p-2 mb-2">
-        <article class="row ps-2 pe-2">
-            <div class="col h6 m-0">Номер чит билета</div>
-            <a class="h5 text-decoration-none col m-0" href="">Иван Иваныч </a>
-            <div class="col">номер телефона</div>
-            <div class="col">Адрес</div>
-        </article>
-    </section>
-    <section class="col-9 border bg-light rounded-3 p-2 mb-2">
-        <article class="row ps-2 pe-2">
-            <div class="col h6 m-0">Номер чит билета</div>
-            <a class="h5 text-decoration-none col m-0" href="">Иван Иваныч </a>
-            <div class="col">номер телефона</div>
-            <div class="col">Адрес</div>
-        </article>
-    </section>
+        <?php
+        foreach ($users as $user) {
+            echo '<section class="col-9 border bg-light rounded-3 p-2 mb-2">';
+            echo '<article class="row ps-2 pe-2">' ;
+            echo '<div class="col h6 m-0">'. $user->login .'</div>';
+            echo '<a class="h5 text-decoration-none col m-0" href="">'. $user->fist_name .' '. $user->last_name .' '. $user->patronymic .'</a>';
+            echo '<div class="col">'. $user->phone_number .'</div>';
+            echo '<div class="col">'. $user->address .'</div>';
+            echo '</article>' ;
+            echo '</section>';
+        }
+        ?>
     <?php
     else:
         ?>

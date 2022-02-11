@@ -5,7 +5,7 @@
     <h2 class="mb-4">Добавление книги</h2>
     <section class="row">
         <h3><?= $message ?? ''; ?></h3>
-        <form method="post" class="col-5 shadow-sm p-3 mb-5 ms-0 bg-body rounded">
+        <form method="post" enctype="multipart/form-data" class="col-5 shadow-sm p-3 mb-5 ms-0 bg-body rounded">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <article class="mb-3">
                 <label for="title" class="form-label">Название</label>
@@ -18,6 +18,10 @@
             <article class="mb-3">
                 <label for="year" class="form-label">Дата написания книги</label>
                 <input type="date" class="form-control" name="year">
+            </article>
+            <article class="mb-3">
+                <label for="image" class="form-label">Обложка</label>
+                <input type="file" class="form-control" name="image">
             </article>
             <article class="mb-3">
                 <label for="new_edition" class="form-check-label">Новое издание</label>
