@@ -10,6 +10,6 @@ class Book extends Model
     use HasFactory;
 
     public $timestamps = false;
-    protected $guarded = ['csrf_token'];
+    protected $guarded = ['csrf_token', 'image'];
 
 }

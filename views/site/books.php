@@ -29,7 +29,7 @@
             echo '<article class="row text-start p-4">';
             echo '<a class="h5 text-decoration-none" href="">'.$book->title.'</a>';
             echo '<p class="">'.$book->annotation.'</p>';
-            echo '<p class="align-self-end h6">Написал гогол</p>';
+            echo '<p class="align-self-end h6"> гогол</p>';
             echo '</article>';
             echo '</section>';
             echo '</section>';

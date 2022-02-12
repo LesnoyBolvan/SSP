@@ -8,6 +8,16 @@
         <form method="post" enctype="multipart/form-data" class="col-5 shadow-sm p-3 mb-5 ms-0 bg-body rounded">
             <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <article class="mb-3">
+                <label for="title" class="form-label">Автор</label>
+                <select class="form-select" aria-label="Default select example" name="author_id">
+                    <?php
+                    foreach ($authors as $author) {
+                        echo "<option label='$author->first_name $author->patronymic $author->last_name'>$author->id</option>";
+                    }
+                    ?>
+                </select>
+            </article>
+            <article class="mb-3">
                 <label for="title" class="form-label">Название</label>
                 <input type="text" class="form-control" name="title">
             </article>

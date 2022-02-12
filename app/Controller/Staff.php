@@ -74,6 +74,7 @@ class Staff
 
     public function bookAdd(Request $request): string
     {
+        $authors = Author::all();
         if ($request->method==='POST'){
             $file = $_FILES['image']['name'];
             $file_tmp = $_FILES['image']['tmp_name'];
@@ -100,30 +101,14 @@ class Staff
                     ['message' => json_encode($validator->errors(), JSON_UNESCAPED_UNICODE)]);
             }
 
-            if(Book::create([
-                'title'=>$request->title,
-                'annotation'=>$request->annotation,
-                'year'=>$request->year,
-                'image'=>$file,
-                'new_edition'=>$request->new_edition,
-                'price'=>$request->price,
-            ])){
-
-                return new View('site.book_add', ['message'=>'Книга добавлена']);
+            if($book = Book::create($request->all())){
+                $book->image = $file;
+                $book->save();
+                return new View('site.book_add', ['message'=>'Книга добавлена','authors'=>$authors]);
             }
 
         }
-        return new View('site.book_add');
-    }
-
-    public function bookDelete(Request $request): string
-    {
-        Book::where('id', $request->id)->delete();
-        $books = Book::all();
-        app()->route->redirect('/books_list');
-
-        return (new View())->render('site.books_list', ['books' => $books]);
-
+        return new View('site.book_add',['authors'=>$authors]);
     }
 
     public function authorAdd(Request $request): string
@@ -144,8 +129,6 @@ class Staff
             if (Author::create($request->all())){
                 return new View('site.author_add', ['message'=>'Автор добавлен']);
             }
-
-
         }
         return new View('site.author_add');
     }
@@ -160,6 +143,16 @@ class Staff
     {
         $books = Book::all();
         return new View('site.books_list', ['books' => $books]);
+    }
+
+    public function bookDelete(Request $request): string
+    {
+        Book::where('id', $request->id)->delete();
+        $books = Book::all();
+        app()->route->redirect('/books_list');
+
+        return (new View())->render('site.books_list', ['books' => $books]);
+
     }
 
     public function authorsList(): string
