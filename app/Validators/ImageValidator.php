@@ -12,7 +12,7 @@ class ImageValidator extends AbstractValidator
     public function rule(): bool
     {
         $type_valid = ['image/jpeg','image/jpg','image/png'];
-        $value  = mime_content_type($this->value);
+        $value  = $_FILES['image']['type'];
         return in_array($value, $type_valid);
     }
 }

@@ -14,16 +14,6 @@ use Illuminate\Support\Facades\DB;
 
 class Reader
 {
-    public function book(): string
-    {
-        return new View('site.book');
-    }
-
-    public function books(): string
-    {
-        $books = Book::all();
-        return new View('site.books', ['books' => $books]);
-    }
 
     public function readerCard(): string
     {

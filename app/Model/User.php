@@ -4,6 +4,7 @@ namespace Model;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Src\Auth\IdentityInterface;
 
@@ -23,7 +24,7 @@ class User extends Model implements IdentityInterface
 //        });
 //    }
 
-    public function password(): string
+    public static function password(): string
     {
         $chars = '0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
         $size = strlen($chars) - 1;
@@ -38,6 +39,12 @@ class User extends Model implements IdentityInterface
     {
         return $this->hasOne(Role::class, 'id', 'role_id');
     }
+
+    public function user() : HasMany
+    {
+        return $this->hasMany(RentedBook::class, 'user_id', 'id');
+    }
+
 
         //Выборка пользователя по первичному ключу
     public function findIdentity(int $id)

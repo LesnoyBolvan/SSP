@@ -2,6 +2,10 @@
 
 namespace Controller;
 
+use Model\Author;
+use Model\Book;
+use Model\BookAuthor;
+use Model\RentedBook;
 use Model\Role;
 use Src\View;
 use Src\Request;
@@ -13,11 +17,25 @@ class Site
 
     public function popular(Request $request): string
     {
-//        $popular = Post::where('id', $request->id)->get();
-//        return (new View())->render('site.post', ['popular' => $popular]);
-        return (new View())->render('site.popular');
+//        $count = BookAuthor::orderBy('count', 'DESC')->take(20)->get('book_id');
+//        $popular = Book::where('id', $count)->get();
+//        file_put_contents('txt.txt', $popular);
+        $popular = Book::all();
+        return (new View())->render('site.popular', ['popular' => $popular]);
     }
 
+    public function books(Request $request): string
+    {
+        if($request->method==='POST'){
+            $search = $request->search;
+            $author = Author::where('first_name', $search)->orWhere('last_name');
+            $book = Book::where('title', $search)->get();
+            return new View('site.books', ['books' => $book]);
+        }
+        $books = Book::all();
+        return new View('site.books', ['books' => $books]);
+
+    }
 
     public function login(Request $request): string
     {

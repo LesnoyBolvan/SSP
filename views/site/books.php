@@ -2,18 +2,12 @@
     <section class="d-flex flex-direction-row">
         <h2 class="mb-5 me-3">Популярное</h2>
         <form method="post" class="row g-3">
+            <input name="csrf_token" type="hidden" value="<?= app()->auth::generateCSRF() ?>"/>
             <article class="col-auto">
-                <input class="form-control" list="datalistOptions" placeholder="Фильтрация">
-                <datalist id="datalistOptions">
-                    <option value="Иван Иваныч">
-                    <option value="New York">
-                    <option value="Seattle">
-                    <option value="Los Angeles">
-                    <option value="Chicago">
-                </datalist>
+                <input class="form-control" type="search" placeholder="Поиск" name="search">
             </article>
             <article class="col-auto">
-                <button type="submit" class="btn btn-primary btn-md">Применить</button>
+                <button type="submit" class="btn btn-primary btn-md">Искать</button>
             </article>
         </form>
     </section>

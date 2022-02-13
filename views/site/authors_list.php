@@ -25,6 +25,7 @@
             echo '<section class="col-9 border bg-light rounded-3 p-2 mb-2">';
             echo '<article class="row ps-2 pe-2">';
             echo '<a class="h5 text-decoration-none col m-0" href="">'. $author->first_name .' '. $author->patronymic .' '. $author->last_name .'</a>';
+            echo '<a class="col btn btn-danger btn-sm p-0" href='.app()->route->getUrl('/author_delete?id='. $author->id).'>Удалить</a>';
             echo '</article>';
             echo '</section>';
         }
