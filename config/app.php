@@ -16,6 +16,7 @@ return [
         'unique' => \Validators\UniqueValidator::class,
         'fileType' => \Validators\ImageValidator::class,
         'number' => \Validators\NumValidator::class,
+        'russian'=> \Validators\RusValidator::class,
     ],
     'routeAppMiddleware' => [
         'csrf' => \Middlewares\CSRFMiddleware::class,

@@ -17,6 +17,7 @@ class Reader
 
     public function readerCard(): string
     {
+
         return new View('site.reader_card');
     }
 }

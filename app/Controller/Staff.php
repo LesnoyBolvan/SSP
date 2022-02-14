@@ -23,13 +23,14 @@ class Staff
         if ($request->method === 'POST'){
 
             $validator = new Validator($request->all(), [
-                'first_name'=> ['required'],
-                'last_name'=> ['required'],
+                'first_name'=> ['required','russian'],
+                'last_name'=> ['required','russian'],
                 'phone_number'=> ['required', 'unique:users,phone_number'],
                 'address'=> ['required']
             ], [
                 'required' => 'Поле :field пусто',
-                'unique' => 'Поле :field должно быть уникально'
+                'unique' => 'Поле :field должно быть уникально',
+                'russian' => 'Разрешен только русский язык'
             ]);
 
             if($validator->fails()){
@@ -73,8 +74,8 @@ class Staff
             move_uploaded_file($file_tmp, $path.$file);
 
             $validator = new Validator($request->all(), [
-                'title'=> ['required'],
-                'annotation'=> ['required'],
+                'title'=> ['required','russian'],
+                'annotation'=> ['required','russian'],
                 'year'=> ['required'],
                 'image'=> ['required', 'fileType'],
                 'price'=>['required', 'number']
@@ -82,7 +83,8 @@ class Staff
                 'required' => 'Поле :field пусто',
                 'unique' => 'Поле :field должно быть уникально',
                 'fileType'=>'Недопустимое разрешение файла',
-                'number'=> 'Поле :field должно быть числом'
+                'number'=> 'Поле :field должно быть числом',
+                'russian' => 'Разрешен только русский язык'
             ]);
 
             if($validator->fails()){
@@ -109,10 +111,11 @@ class Staff
         if ($request->method==='POST'){
 
             $validator = new Validator($request->all(), [
-                'first_name'=> ['required'],
-                'last_name'=> ['required'],
+                'first_name'=> ['required','russian'],
+                'last_name'=> ['required','russian'],
             ], [
                 'required' => 'Поле :field пусто',
+                'russian' => 'Разрешен только русский язык'
             ]);
 
             if($validator->fails()){

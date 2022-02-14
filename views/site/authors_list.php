@@ -3,7 +3,7 @@
     if (app()->auth::check_staff()):
         ?>
         <section class="d-flex flex-direction-row">
-            <h2 class="mb-5 me-3">Читатели</h2>
+            <h2 class="mb-5 me-3">Авторы</h2>
             <form method="post" class="row g-3">
                 <article class="col-auto">
                     <input class="form-control" list="datalistOptions" placeholder="Фильтрация">
