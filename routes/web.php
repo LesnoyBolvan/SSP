@@ -2,6 +2,7 @@
 
 use Src\Route;
 
+Route::add('GET', '/', [Controller\Site::class, 'popular']);
 Route::add(['GET', 'POST'], '/login', [Controller\Site::class, 'login']);
 Route::add('GET', '/logout', [Controller\Site::class, 'logout']);
 Route::add('GET', '/popular', [Controller\Site::class, 'popular'])
@@ -10,7 +11,7 @@ Route::add(['GET', 'POST'], '/user_add', [Controller\Staff::class, 'userAdd'])
     ->middleware('staff');
 Route::add(['GET', 'POST'], '/book_register', [Controller\Staff::class, 'bookRegister'])
     ->middleware('staff');
-Route::add('GET', '/readers_list', [Controller\Staff::class, 'readersList'])
+Route::add(['GET', 'POST'], '/readers_list', [Controller\Staff::class, 'readersList'])
     ->middleware('staff');
 Route::add(['GET', 'POST'], '/books_list', [Controller\Staff::class, 'booksList'])
     ->middleware('staff');

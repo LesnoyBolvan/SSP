@@ -17,10 +17,8 @@ class Site
 
     public function popular(Request $request): string
     {
-//        $count = BookAuthor::orderBy('count', 'DESC')->take(20)->get('book_id');
-//        $popular = Book::where('id', $count)->get();
-//        file_put_contents('txt.txt', $popular);
-        $popular = Book::all();
+        $count = BookAuthor::orderBy('count', 'DESC')->take(20)->get('book_id');
+        $popular = Book::whereIn('id', $count)->get();
         return (new View())->render('site.popular', ['popular' => $popular]);
     }
 

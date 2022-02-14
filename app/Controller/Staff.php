@@ -152,8 +152,18 @@ class Staff
         return new View('site.book_register', ['books'=>$books, 'users'=>$users]);
     }
 
-    public function readersList(): string
+    public function readersList(Request $request): string
     {
+        if($request->method==='POST'){
+            $search = $request->search;
+            $book = Book::where('title', $search)->first('id');
+            $ba = BookAuthor::whereIn('book_id', $book)->first('id');
+            $rent = RentedBook::whereIn('book_authors_id', $ba)->get('user_id');
+            $users = User::whereIn('id', $rent)->get();
+            file_put_contents('txt.txt', $users);
+            return new View('site.readers_list', ['users' => $users]);
+        }
+
         $users = User::where('role_id', '!=', 3)->get();
         return new View('site.readers_list', ['users' => $users]);
     }
@@ -167,7 +177,7 @@ class Staff
             $rb = RentedBook::where('user_id', $user->id)->get('book_authors_id')->toArray();
             $ab = BookAuthor::whereIn('id', $rb)->get('book_id');
             $book = Book::whereIn('id', $ab)->get();
-            file_put_contents('txt.txt', $book);
+            file_put_contents('txt.txt', $ab);
             return new View('site.books_list', ['books' => $book]);
         }
         $books = Book::all();
