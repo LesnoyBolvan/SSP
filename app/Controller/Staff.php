@@ -77,11 +77,12 @@ class Staff
                 'annotation'=> ['required'],
                 'year'=> ['required'],
                 'image'=> ['required', 'fileType'],
-                'price'=>['required']
+                'price'=>['required', 'number']
             ], [
                 'required' => 'Поле :field пусто',
                 'unique' => 'Поле :field должно быть уникально',
                 'fileType'=>'Недопустимое разрешение файла',
+                'number'=> 'Поле :field должно быть числом'
             ]);
 
             if($validator->fails()){

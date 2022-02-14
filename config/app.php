@@ -15,6 +15,7 @@ return [
         'required' => \Validators\RequireValidator::class,
         'unique' => \Validators\UniqueValidator::class,
         'fileType' => \Validators\ImageValidator::class,
+        'number' => \Validators\NumValidator::class,
     ],
     'routeAppMiddleware' => [
         'csrf' => \Middlewares\CSRFMiddleware::class,
